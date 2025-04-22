@@ -54,6 +54,15 @@
            filter: brightness(0) invert(1); /* Makes SVG white */
            opacity: 0.8;
         }
+         /* Style for footer logos */
+        .footer-logo {
+            height: 30px; /* Adjust height */
+            width: auto; /* Maintain aspect ratio */
+            max-width: 100px; /* Max width */
+            filter: brightness(0) invert(1); /* Make logos white */
+            opacity: 0.7; /* Slightly transparent */
+            object-fit: contain; /* Ensure logo fits */
+        }
         /* Timeline vertical line for desktop */
         .timeline-container::before {
             content: '';
@@ -111,6 +120,7 @@
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Streamline Your Operations with Perks AI</h1>
             <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Bahrain's first youth-led AI agency, helping businesses like yours streamline operations, cut costs, and boost efficiency with intelligent automation.</p>
+            <p class="text-sm text-blue-200 mb-10">(A Subsidiary of Al Hilal Group | Partnered with Gulf Daily News)</p>
 
             <div class="mt-12 flex justify-center items-center space-x-3">
                 <span class="text-blue-200 text-sm">Trusted by leaders like:</span>
@@ -437,7 +447,21 @@
 
     <footer class="bg-gray-800 text-gray-400 py-8">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-sm mt-4 md:mt-0">&copy; 2025 Perks AI. All Rights Reserved.</p>
+            <div class="flex justify-center items-center space-x-6 mb-4">
+                 <img
+                    src="https://www.alhilalgroup.com/images/logo.png"
+                    alt="Al Hilal Group Logo"
+                    class="footer-logo"
+                    onerror="this.style.display='none'; this.onerror=null; const fallback=document.createElement('span'); fallback.textContent='Al Hilal Group'; fallback.className='text-gray-400 text-xs inline-block'; this.parentNode.insertBefore(fallback, this);"
+                 >
+                 <img
+                    src="https://www.gdnonline.com/gdnimages/gdn_logo_new.png"
+                    alt="Gulf Daily News Logo"
+                    class="footer-logo"
+                    onerror="this.style.display='none'; this.onerror=null; const fallback=document.createElement('span'); fallback.textContent='GDN'; fallback.className='text-gray-400 text-xs inline-block'; this.parentNode.insertBefore(fallback, this);"
+                 >
+            </div>
+            <p class="text-sm">&copy; 2025 Perks AI. All Rights Reserved. A Subsidiary of Al Hilal Group.</p>
             <p class="text-xs mt-1">Website: <a href="http://PerksMENA.com" class="hover:text-white">PerksMENA.com</a> | Email: <a href="mailto:perks.bh2025@gmail.com" class="hover:text-white">perks.bh2025@gmail.com</a></p>
         </div>
     </footer>
