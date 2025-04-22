@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perks - AI Automation for Retail Growth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple animation for cards on hover */
+        .animated-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        /* Style for placeholder logo (Perks Logo) */
+        .logo-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e5e7eb; /* gray-200 */
+            color: #6b7280; /* gray-500 */
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* medium */
+            height: 40px;
+            width: 120px;
+            border: 1px dashed #9ca3af; /* gray-400 */
+        }
+        /* Removed partner-logo-placeholder style */
+
+        /* Pricing card distinction */
+        .pricing-card.popular {
+            border-color: #3b82f6; /* blue-500 */
+            border-width: 2px;
+            position: relative;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 600; /* semibold */
+            padding: 4px 10px;
+            border-radius: 9999px; /* rounded-full */
+        }
+        /* Ensure SVG logo color adapts */
+        .trusted-logo {
+           filter: brightness(0) invert(1); /* Makes SVG white */
+           opacity: 0.8;
+        }
+        /* Style for footer logos */
+        .footer-logo {
+            height: 30px; /* Adjust height */
+            width: auto; /* Maintain aspect ratio */
+            max-width: 100px; /* Max width */
+            filter: brightness(0) invert(1); /* Make logos white */
+            opacity: 0.7; /* Slightly transparent */
+            object-fit: contain; /* Ensure logo fits */
+        }
+        /* Timeline vertical line for desktop */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 1.5rem;
+            bottom: 1.5rem;
+            width: 2px;
+            background-color: #93c5fd; /* blue-300 */
+            display: none;
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+             .timeline-container::before {
+                display: block;
+            }
+        }
+        /* Timeline item connector for mobile */
+         .mobile-connector {
+            position: absolute;
+            left: calc(1.5rem - 1px);
+            top: 3rem;
+            height: calc(100% - 3rem);
+            width: 2px;
+            background-color: #93c5fd; /* blue-300 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="logo-placeholder">Perks Logo</div>
+            <div class="space-x-6 hidden md:flex">
+                <a href="#services" class="text-gray-600 hover:text-blue-600 transition duration-200">Services</a>
+                <a href="#why-perks" class="text-gray-600 hover:text-blue-600 transition duration-200">Why Perks?</a>
+                <a href="#pricing" class="text-gray-600 hover:text-blue-600 transition duration-200">Pricing</a>
+                <a href="#process" class="text-gray-600 hover:text-blue-600 transition duration-200">Process</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-200">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-gray-600 text-xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white py-2 border-t border-gray-200">
+            <a href="#services" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Services</a>
+            <a href="#why-perks" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Why Perks?</a>
+            <a href="#pricing" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Pricing</a>
+            <a href="#process" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Process</a>
+            <a href="#contact" class="block px-6 py-2 text-gray-600 hover:bg-gray-100">Contact</a>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white pt-24 pb-32">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">AI-Powered Automation for Retail Growth</h1>
+            <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Bahrain's first youth-led AI agency, helping businesses like yours streamline operations, cut costs, and boost efficiency with intelligent automation.</p>
+            <p class="text-sm text-blue-200 mb-10">(A Subsidiary of Al Hilal Group | Partnered with Gulf Daily News)</p>
+
+            <div class="mt-12 flex justify-center items-center space-x-3">
+                <span class="text-blue-200 text-sm">Trusted by leaders like:</span>
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Landmark_Group_Logo.svg"
+                    alt="Landmark Group Logo"
+                    class="h-10 md:h-12 w-auto inline-block trusted-logo"
+                    onerror="this.style.display='none'; this.onerror=null; const fallback=document.createElement('span'); fallback.textContent='Landmark Group'; fallback.className='text-blue-200 text-sm font-medium inline-block'; this.parentNode.insertBefore(fallback, this);"
+                >
+            </div>
+
+            <div class="mt-8">
+                <a href="#contact" class="inline-block bg-white text-blue-600 font-semibold px-6 py-2 rounded-md hover:bg-gray-100 transition duration-300 shadow">Contact Us</a>
+            </div>
+
+        </div>
+    </header>
+
+    <section id="services" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Intelligent Automation Services</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">We design and implement bespoke AI automation solutions to tackle your most time-consuming tasks and unlock new efficiencies.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-16 gap-y-12">
+                <div class="space-y-4">
+                    <div class="animated-card bg-white p-6 rounded-lg shadow border border-gray-200 flex items-center space-x-4">
+                        <div class="flex-shrink-0 text-purple-600 bg-purple-100 p-3 rounded-full"><i class="fas fa-share-alt fa-lg"></i></div>
+                        <h3 class="text-xl md:text-2xl font-semibold">Marketing & Social Media Automation</h3>
+                    </div>
+                    <p class="text-gray-600 pl-4">Stop wasting hours on repetitive social media tasks. We automate:</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 pl-8">
+                        <li><span class="font-medium">Content Scheduling & Publishing:</span> Auto-post across Instagram, Facebook, TikTok, LinkedIn, etc.</li>
+                        <li><span class="font-medium">Multi-Language Content:</span> AI-powered translation and generation for wider reach.</li>
+                        <li><span class="font-medium">Performance Tracking:</span> Real-time dashboards consolidating key metrics.</li>
+                        <li><span class="font-medium">Ad Campaign Management:</span> Basic automation for budget allocation and A/B testing setup.</li>
+                        <li><span class="font-medium">Arabic Content Localization:</span> High-quality video dubbing, subtitling, and culturally relevant adaptations.</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="animated-card bg-white p-6 rounded-lg shadow border border-gray-200 flex items-center space-x-4">
+                        <div class="flex-shrink-0 text-green-600 bg-green-100 p-3 rounded-full"><i class="fas fa-users fa-lg"></i></div>
+                        <h3 class="text-xl md:text-2xl font-semibold">Customer Engagement & CRM Automation</h3>
+                    </div>
+                    <p class="text-gray-600 pl-4">Enhance customer relationships and streamline communication:</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 pl-8">
+                        <li><span class="font-medium">Email Marketing Automation:</span> Automated welcome series, follow-ups, nurture sequences, and personalized campaigns.</li>
+                        <li><span class="font-medium">CRM Data Entry & Updates:</span> Automatically sync customer data between platforms.</li>
+                        <li><span class="font-medium">Lead Qualification & Routing:</span> Score leads based on behavior and route them to the right team member.</li>
+                        <li><span class="font-medium">Customer Support Bots:</span> Handle common queries instantly via chatbots.</li>
+                        <li><span class="font-medium">Feedback Collection:</span> Automate post-purchase surveys and review requests.</li>
+                    </ul>
+                </div>
+
+                 <div class="space-y-4">
+                    <div class="animated-card bg-white p-6 rounded-lg shadow border border-gray-200 flex items-center space-x-4">
+                        <div class="flex-shrink-0 text-blue-600 bg-blue-100 p-3 rounded-full"><i class="fas fa-cogs fa-lg"></i></div>
+                        <h3 class="text-xl md:text-2xl font-semibold">Business Operations Automation</h3>
+                    </div>
+                    <p class="text-gray-600 pl-4">Optimize internal workflows and data management:</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 pl-8">
+                        <li><span class="font-medium">Data Entry & Migration:</span> Automate the transfer of information between spreadsheets, databases, and apps.</li>
+                        <li><span class="font-medium">Report Generation:</span> Automatically compile data and generate standard reports (e.g., sales summaries, inventory levels).</li>
+                        <li><span class="font-medium">Internal Task Management:</span> Automate reminders, task assignments, and project updates.</li>
+                        <li><span class="font-medium">Invoice Processing:</span> Extract data from invoices and automate approval workflows.</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="animated-card bg-white p-6 rounded-lg shadow border border-gray-200 flex items-center space-x-4">
+                        <div class="flex-shrink-0 text-yellow-600 bg-yellow-100 p-3 rounded-full"><i class="fas fa-brain fa-lg"></i></div>
+                        <h3 class="text-xl md:text-2xl font-semibold">Custom AI Integration</h3>
+                    </div>
+                    <p class="text-gray-600 pl-4">Go beyond standard automation with AI:</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 pl-8">
+                        <li><span class="font-medium">Customer Analytics:</span> Deeper insights into behavior, segmentation, and lifetime value.</li>
+                        <li><span class="font-medium">Predictive Modeling:</span> Forecast sales trends or customer churn.</li>
+                        <li><span class="font-medium">Personalization Engines:</span> AI-driven product recommendations and content suggestions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-perks" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Why Partner with Perks?</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">We deliver more than just automation; we deliver measurable results and a competitive edge.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+                <div class="space-y-8">
+                    <div class="animated-card bg-white p-6 rounded-lg shadow border border-gray-200">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <i class="fas fa-handshake text-blue-500 text-2xl w-8 text-center"></i>
+                            <h3 class="text-xl font-semibold">Risk-Free Results-Based Pricing</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">Our core promise: You only pay when we deliver pre-agreed, tangible results. We invest in your success first, minimizing your financial risk and ensuring clear ROI.</p>
+                    </div>
+                    <div class="animated-card bg-white p-6 rounded-lg shadow border border-gray-200">
+                        <div class="flex items-center space-x-4 mb-3">
+                             <i class="fas fa-lightbulb text-yellow-500 text-2xl w-8 text-center"></i>
+                            <h3 class="text-xl font-semibold">Youth-Led Innovation & Expertise</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">Tap into the insights of Bahrain's top young tech minds. We bring fresh, cutting-edge AI solutions combined with deep technical expertise focused purely on automation.</p>
+                    </div>
+                     <div class="animated-card bg-white p-6 rounded-lg shadow border border-gray-200">
+                        <div class="flex items-center space-x-4 mb-3">
+                             <i class="fas fa-bullhorn text-red-500 text-2xl w-8 text-center"></i>
+                            <h3 class="text-xl font-semibold">Strategic Media Amplification</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm">Leverage our exclusive partnership with Gulf Daily News and the backing of Al Hilal Group for unparalleled media reach and brand amplification in Bahrain and the GCC.</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-lg border border-blue-200 shadow-lg">
+                    <h3 class="text-2xl font-semibold text-center text-blue-800 mb-6">Potential Impact on Your KPIs*</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-clock text-green-600 text-3xl w-8 text-center flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-700">Increase Efficiency & Time Savings</h4>
+                                <p class="text-gray-600">Potential to save <span class="font-bold">20-150+ hours</span> per month by automating repetitive tasks.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <i class="fas fa-dollar-sign text-green-600 text-3xl w-8 text-center flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-700">Reduce Operational Costs</h4>
+                                <p class="text-gray-600">Lower costs associated with manual labor, errors, and inefficient processes by an estimated <span class="font-bold">15-40%</span>.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start space-x-4">
+                            <i class="fas fa-chart-line text-green-600 text-3xl w-8 text-center flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-700">Boost Marketing Engagement</h4>
+                                <p class="text-gray-600">See potential increases in social media engagement rates by <span class="font-bold">10-30%</span> through targeted automation and localization.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-users-cog text-green-600 text-3xl w-8 text-center flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-700">Improve Customer Experience</h4>
+                                <p class="text-gray-600">Enhance responsiveness and personalization, potentially improving customer satisfaction scores.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-6 text-center">*Estimates based on typical client results and industry benchmarks. Actual impact varies based on specific processes and implementation scope.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Results-Based Pricing Tiers</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">Choose the plan that fits your automation goals. Remember, you primarily pay for delivered results (milestones).</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="pricing-card animated-card border border-gray-200 rounded-lg p-6 flex flex-col shadow-md bg-gray-50">
+                    <h3 class="text-xl font-semibold mb-2 text-center">Starter Automations</h3>
+                    <p class="text-center text-gray-500 text-sm mb-6">Ideal for specific pain points</p>
+                    <div class="text-center mb-6">
+                        <span class="text-2xl font-bold block">Milestone-Based Fee</span>
+                        <span class="text-gray-500 text-xs">(Pay per result)</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600 flex-grow mb-6">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Up to <span class="font-semibold mx-1">3</span> Key Automations</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Focus on 1 Business Area (e.g., Social Media)</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Est. <span class="font-semibold mx-1">15-30</span> Hours Saved/Month*</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Basic Performance Dashboard</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Email Support</span></li>
+                        <li class="flex items-start"><i class="fas fa-times-circle text-gray-400 mr-2 mt-1 flex-shrink-0"></i><span>No Custom AI Integration</span></li>
+                        <li class="flex items-start"><i class="fas fa-times-circle text-gray-400 mr-2 mt-1 flex-shrink-0"></i><span>Limited Media Amplification</span></li>
+                    </ul>
+                    <a href="#contact" class="mt-auto block w-full text-center bg-gray-300 text-gray-800 font-semibold px-6 py-2 rounded-md hover:bg-gray-400 transition duration-300">Discuss Project</a>
+                    <p class="text-xs text-center text-gray-400 mt-3">Nominal setup fee applies</p>
+                </div>
+
+                <div class="pricing-card popular animated-card border-blue-500 border-2 rounded-lg p-6 flex flex-col shadow-xl bg-white relative">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3 class="text-xl font-semibold mb-2 text-center text-blue-600">Growth Suite</h3>
+                    <p class="text-center text-gray-500 text-sm mb-6">Comprehensive automation for core processes</p>
+                     <div class="text-center mb-6">
+                         <span class="text-2xl font-bold block">Milestone-Based Fee</span>
+                        <span class="text-gray-500 text-xs">(Pay per result)</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600 flex-grow mb-6">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Up to <span class="font-semibold mx-1">7</span> Key Automations</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Across <span class="font-semibold mx-1">2-3</span> Business Areas</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Est. <span class="font-semibold mx-1">40-80</span> Hours Saved/Month*</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Advanced Performance Dashboard</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Priority Email & Chat Support</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Basic AI Integration (e.g., Analytics Setup)</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Standard Media Amplification (GDN)</span></li>
+                    </ul>
+                    <a href="#contact" class="mt-auto block w-full text-center bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300">Discuss Project</a>
+                     <p class="text-xs text-center text-gray-400 mt-3">Nominal setup fee applies</p>
+                </div>
+
+                <div class="pricing-card animated-card border border-gray-200 rounded-lg p-6 flex flex-col shadow-md bg-gray-50">
+                    <h3 class="text-xl font-semibold mb-2 text-center">Enterprise Transformation</h3>
+                    <p class="text-center text-gray-500 text-sm mb-6">Full-scale AI integration & optimization</p>
+                     <div class="text-center mb-6">
+                         <span class="text-2xl font-bold block">Milestone-Based Fee</span>
+                        <span class="text-gray-500 text-xs">(Pay per result)</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600 flex-grow mb-6">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span><span class="font-semibold mx-1">10+</span> Custom Automations</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Company-Wide Scope</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Est. <span class="font-semibold mx-1">100+</span> Hours Saved/Month*</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Fully Customized Dashboards & Reporting</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Dedicated Account Manager & Support</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Advanced Custom AI Integration</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i><span>Premium Media Amplification Package</span></li>
+                    </ul>
+                    <a href="#contact" class="mt-auto block w-full text-center bg-gray-300 text-gray-800 font-semibold px-6 py-2 rounded-md hover:bg-gray-400 transition duration-300">Discuss Project</a>
+                     <p class="text-xs text-center text-gray-400 mt-3">Setup fee based on scope</p>
+                </div>
+            </div>
+            <p class="text-center text-xs text-gray-500 mt-8">*Time and potential cost savings are estimates based on typical automation impacts and vary per client.</p>
+        </div>
+    </section>
+
+    <section id="process" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Our Collaborative Process</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">A clear path from discovery to results.</p>
+            <div class="relative max-w-4xl mx-auto timeline-container">
+                <div class="space-y-12 md:space-y-0">
+
+                    <div class="relative md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-0">
+                        <div class="md:col-start-2 md:pl-8 text-center md:text-left relative pb-12 md:pb-16">
+                            <div class="mobile-connector md:hidden"></div>
+                            <div class="absolute left-0 md:left-[-2rem] top-0 transform md:-translate-x-1/2">
+                                <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold z-10 relative shadow">1</div>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-1 mt-2 md:mt-0">Discovery & Strategy</h3>
+                            <p class="text-sm text-gray-600">(Weeks 1-4) Deep dive into goals, workflows, and opportunities. Finalize tailored automation strategy.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-0">
+                        <div class="md:col-start-1 md:text-right md:pr-8 text-center relative pb-12 md:pb-16">
+                            <div class="mobile-connector md:hidden"></div>
+                            <div class="absolute left-0 md:left-auto md:right-[-2rem] top-0 transform md:translate-x-1/2">
+                                <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold z-10 relative shadow">2</div>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-1 mt-2 md:mt-0">Implementation & Setup</h3>
+                            <p class="text-sm text-gray-600">(Weeks 5-8) Configure systems, build workflows, create initial content, and integrate AI tools.</p>
+                        </div>
+                    </div>
+
+                     <div class="relative md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-0">
+                        <div class="md:col-start-2 md:pl-8 text-center md:text-left relative pb-12 md:pb-16">
+                            <div class="mobile-connector md:hidden"></div>
+                             <div class="absolute left-0 md:left-[-2rem] top-0 transform md:-translate-x-1/2">
+                                <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold z-10 relative shadow">3</div>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-1 mt-2 md:mt-0">Testing & Refinement</h3>
+                            <p class="text-sm text-gray-600">(Weeks 9-10) User acceptance testing, feedback incorporation, and system optimization.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative md:grid md:grid-cols-2 md:gap-8 items-center">
+                         <div class="md:col-start-1 md:text-right md:pr-8 text-center relative">
+                             <div class="absolute left-0 md:left-auto md:right-[-2rem] top-0 transform md:translate-x-1/2">
+                                <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold z-10 relative shadow">4</div>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-1 mt-2 md:mt-0">Launch & Optimize</h3>
+                            <p class="text-sm text-gray-600">(Week 11 onwards) Go live! Continuous monitoring, reporting, and optimization for ongoing success.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 bg-gradient-to-br from-gray-800 to-gray-900 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Start Your Automation Journey</h2>
+            <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto">Let's discuss how Perks' AI solutions can drive efficiency and growth for your business. Contact us today.</p>
+            <div class="max-w-lg mx-auto bg-white text-gray-800 p-8 rounded-lg shadow-xl">
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-semibold text-lg mb-3">Key Contacts:</h4>
+                         <div class="flex items-center space-x-3 mb-3">
+                            <i class="fas fa-user text-blue-600 w-5 text-center flex-shrink-0"></i>
+                            <div>
+                                <p class="text-md font-medium">Yousif Hasan <span class="text-sm text-gray-500">(CEO)</span></p>
+                            </div>
+                        </div>
+                         <div class="flex items-center space-x-3">
+                            <i class="fas fa-user text-blue-600 w-5 text-center flex-shrink-0"></i>
+                            <div>
+                                <p class="text-md font-medium">Hamzeh Alsarabi <span class="text-sm text-gray-500">(CSO)</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="border-t border-gray-200 pt-5 space-y-4">
+                         <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-600 w-5 text-center flex-shrink-0"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-500 text-sm">Email</h4>
+                                <a href="mailto:perks.bh2025@gmail.com" class="text-lg text-blue-600 hover:underline break-all">perks.bh2025@gmail.com</a>
+                            </div>
+                        </div>
+                         <div class="flex items-center space-x-3">
+                             <i class="fas fa-phone text-blue-600 w-5 text-center flex-shrink-0"></i>
+                            <div>
+                                 <h4 class="font-semibold text-gray-500 text-sm">Phone</h4>
+                                <a href="tel:+97339353577" class="text-lg text-blue-600 hover:underline whitespace-nowrap">+973 3935 3577</a>
+                            </div>
+                        </div>
+                         <div class="flex items-center space-x-3">
+                             <i class="fas fa-globe text-blue-600 w-5 text-center flex-shrink-0"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-500 text-sm">Website</h4>
+                                <a href="http://PerksMENA.com" target="_blank" rel="noopener noreferrer" class="text-lg text-blue-600 hover:underline">PerksMENA.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center items-center space-x-6 mb-4">
+                 {/* Al Hilal Group Logo */}
+                 <img
+                    src="https://www.alhilalgroup.com/images/logo.png"
+                    alt="Al Hilal Group Logo"
+                    class="footer-logo"
+                    onerror="this.style.display='none'; this.onerror=null; const fallback=document.createElement('span'); fallback.textContent='Al Hilal Group'; fallback.className='text-gray-400 text-xs inline-block'; this.parentNode.insertBefore(fallback, this);"
+                 >
+                 {/* GDN Logo */}
+                 <img
+                    src="https://www.gdnonline.com/gdnimages/gdn_logo_new.png"
+                    alt="Gulf Daily News Logo"
+                    class="footer-logo"
+                    onerror="this.style.display='none'; this.onerror=null; const fallback=document.createElement('span'); fallback.textContent='GDN'; fallback.className='text-gray-400 text-xs inline-block'; this.parentNode.insertBefore(fallback, this);"
+                 >
+            </div>
+            <p class="text-sm">&copy; 2025 Perks AI. All Rights Reserved. A Subsidiary of Al Hilal Group.</p>
+            <p class="text-xs mt-1">Website: <a href="http://PerksMENA.com" class="hover:text-white">PerksMENA.com</a> | Email: <a href="mailto:perks.bh2025@gmail.com" class="hover:text-white">perks.bh2025@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Basic Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const navLinks = document.querySelectorAll('nav a'); // Select all nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Check if it's a mobile menu link before hiding
+                if (!mobileMenu.classList.contains('hidden') && link.closest('#mobile-menu')) {
+                     mobileMenu.classList.add('hidden');
+                }
+                // Smooth scroll logic is handled by CSS 'scroll-smooth' on <html>
+            });
+        });
+    </script>
+
+</body>
+</html>
