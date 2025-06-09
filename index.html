@@ -474,9 +474,108 @@
                                 <span class="text-3xl font-bold text-green-600" id="hoursSaved">1040</span>
                                 <span class="text-sm text-gray-600">Hours Saved</span>
                             </div>
-                            <div class="flex flex-col items-center md:items-start">
-                                <span class="text-3xl font-bold text-green-600" id="moneySaved">BHD 5,200</span>
-                                <span class="text-sm text-gray-600">Potential Cost Savings*</span>
+<section id="calculator" class="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
+    <div class="container mx-auto px-6 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Estimate Your Potential Savings</h2>
+        <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">See how much time and money automation could save your business. Adjust the sliders below.</p>
+        <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="space-y-6">
+                    <div>
+                        <label for="taskHours" class="block text-sm font-medium text-gray-700 mb-1">Weekly hours spent on a repetitive task:</label>
+                        <input type="range" id="taskHours" name="taskHours" min="1" max="80" value="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                        <div class="text-right text-sm text-gray-500 mt-1"><span id="taskHoursValue">5</span> hours / week</div>
+                    </div>
+                    <div>
+                        <label for="numEmployees" class="block text-sm font-medium text-gray-700 mb-1">Number of employees doing this task:</label>
+                        <input type="range" id="numEmployees" name="numEmployees" min="1" max="30" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                        <div class="text-right text-sm text-gray-500 mt-1"><span id="numEmployeesValue">1</span> employee(s)</div>
+                    </div>
+                    <div>
+                        <label for="hourlyRate" class="block text-sm font-medium text-gray-700 mb-1">Avg. Employee Hourly Rate (BHD - estimate):</label>
+                        <input type="range" id="hourlyRate" name="hourlyRate" min="1" max="20" value="5" step="0.5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                        <div class="text-right text-sm text-gray-500 mt-1">BHD <span id="hourlyRateValue">5.0</span> / hour</div>
+                    </div>
+                    <div>
+                        <label for="valueMultiplier" class="block text-sm font-medium text-gray-700 mb-1">Business Value Multiplier:</label>
+                        <input type="range" id="valueMultiplier" name="valueMultiplier" min="1.2" max="5" value="2" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                        <div class="text-right text-sm text-gray-500 mt-1">Productive value is <span id="valueMultiplierValue">2.0</span>x wages</div>
+                    </div>
+                </div>
+                <div class="text-center md:text-left bg-gradient-to-br from-blue-50 to-indigo-100 p-6 rounded-lg border border-blue-200">
+                    <h4 class="text-lg font-semibold text-blue-800 mb-4">Estimated Annual Impact:</h4>
+                    <div class="space-y-5">
+                        <div class="flex flex-col items-center md:items-start">
+                            <span class="text-3xl font-bold text-blue-600" id="hoursSaved">260</span>
+                            <span class="text-sm text-gray-600">Hours Reclaimed</span>
+                        </div>
+                        <div class="flex flex-col items-center md:items-start">
+                            <span class="text-3xl font-bold text-green-600" id="moneySaved">BHD 1,300</span>
+                            <span class="text-sm text-gray-600">Direct Wage Savings</span>
+                        </div>
+                        <div class="flex flex-col items-center md:items-start">
+                            <span class="text-4xl font-bold text-green-700" id="totalValueUnlocked">BHD 2,600</span>
+                            <span class="text-sm font-semibold text-gray-700">Total Value Unlocked*</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4">*Based on inputs. Actual impact depends on specific processes and business value.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const taskHoursSlider = document.getElementById('taskHours');
+    const numEmployeesSlider = document.getElementById('numEmployees');
+    const hourlyRateSlider = document.getElementById('hourlyRate');
+    const valueMultiplierSlider = document.getElementById('valueMultiplier');
+
+    const taskHoursValue = document.getElementById('taskHoursValue');
+    const numEmployeesValue = document.getElementById('numEmployeesValue');
+    const hourlyRateValue = document.getElementById('hourlyRateValue');
+    const valueMultiplierValue = document.getElementById('valueMultiplierValue');
+
+    const hoursSavedDisplay = document.getElementById('hoursSaved');
+    const moneySavedDisplay = document.getElementById('moneySaved');
+    const totalValueUnlockedDisplay = document.getElementById('totalValueUnlocked');
+
+    function calculateSavings() {
+        const weeklyHours = parseFloat(taskHoursSlider.value);
+        const employees = parseInt(numEmployeesSlider.value);
+        const rate = parseFloat(hourlyRateSlider.value);
+        const multiplier = parseFloat(valueMultiplierSlider.value);
+
+        // Annual Hours Saved
+        const annualHoursSaved = weeklyHours * employees * 52;
+
+        // Annual Direct Wage Savings
+        const annualMoneySaved = annualHoursSaved * rate;
+
+        // Total Value Unlocked
+        const totalValue = annualMoneySaved * multiplier;
+
+        // Update displayed values for inputs
+        taskHoursValue.textContent = weeklyHours;
+        numEmployeesValue.textContent = employees;
+        hourlyRateValue.textContent = rate.toFixed(1);
+        valueMultiplierValue.textContent = multiplier.toFixed(1) + 'x';
+
+        // Update displayed values for results, using toLocaleString for number formatting
+        hoursSavedDisplay.textContent = Math.round(annualHoursSaved).toLocaleString();
+        moneySavedDisplay.textContent = `BHD ${Math.round(annualMoneySaved).toLocaleString()}`;
+        totalValueUnlockedDisplay.textContent = `BHD ${Math.round(totalValue).toLocaleString()}`;
+    }
+
+    // Event Listeners for sliders
+    taskHoursSlider.addEventListener('input', calculateSavings);
+    numEmployeesSlider.addEventListener('input', calculateSavings);
+    hourlyRateSlider.addEventListener('input', calculateSavings);
+    valueMultiplierSlider.addEventListener('input', calculateSavings);
+
+    // Initial calculation on page load
+    calculateSavings();
+</script>
                             </div>
                         </div>
                         <p class="text-xs text-gray-500 mt-4">*Based on inputs. Actual savings depend on specific processes automated.</p>
