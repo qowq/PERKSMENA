@@ -710,138 +710,124 @@
         </div>
     </footer>
 
-    <script>
-        // --- Mobile Menu Toggle ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+   <script>
+    // --- Mobile Menu Toggle ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (!mobileMenu.classList.contains('hidden') && link.closest('#mobile-menu')) {
+                mobileMenu.classList.add('hidden');
+            }
         });
-        const navLinks = document.querySelectorAll('nav a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (!mobileMenu.classList.contains('hidden') && link.closest('#mobile-menu')) {
-                     mobileMenu.classList.add('hidden');
+    });
+
+    // --- Intersection Observer for Scroll Animations ---
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+                if (entry.target.id === 'process') {
+                    const line = entry.target.querySelector('.timeline-line-animated');
+                    if (line) line.classList.add('line-visible');
+                    const steps = entry.target.querySelectorAll('.timeline-step');
+                    steps.forEach((step, index) => {
+                        setTimeout(() => {
+                            step.classList.add('step-visible');
+                        }, index * 200);
+                    });
                 }
-            });
+                if (entry.target.id === 'why-perks') {
+                    const kpiElements = entry.target.querySelectorAll('.kpi-value');
+                    kpiElements.forEach(el => animateCountUp(el));
+                }
+                observer.unobserve(entry.target);
+            }
         });
+    };
 
-        // --- Intersection Observer for Scroll Animations ---
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-visible');
-                    if (entry.target.id === 'process') {
-                         const line = entry.target.querySelector('.timeline-line-animated');
-                         if (line) line.classList.add('line-visible');
-                         const steps = entry.target.querySelectorAll('.timeline-step');
-                         steps.forEach((step, index) => {
-                             setTimeout(() => {
-                                 step.classList.add('step-visible');
-                             }, index * 200);
-                         });
-                    }
-                     if (entry.target.id === 'why-perks') {
-                        const kpiElements = entry.target.querySelectorAll('.kpi-value');
-                        kpiElements.forEach(el => animateCountUp(el));
-                    }
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        const revealElements = document.querySelectorAll('.reveal');
-        revealElements.forEach(el => observer.observe(el));
-        const processSection = document.getElementById('process');
-        if (processSection) observer.observe(processSection);
-        const whyPerksSection = document.getElementById('why-perks');
-        if (whyPerksSection) observer.observe(whyPerksSection);
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const revealElements = document.querySelectorAll('.reveal');
+    revealElements.forEach(el => observer.observe(el));
+    const processSection = document.getElementById('process');
+    if (processSection) observer.observe(processSection);
+    const whyPerksSection = document.getElementById('why-perks');
+    if (whyPerksSection) observer.observe(whyPerksSection);
 
 
-        // --- KPI Count-Up Animation ---
-        function animateCountUp(el) {
-            const target = parseInt(el.dataset.target, 10);
-            if (isNaN(target)) return;
-            el.textContent = '0';
-            let current = 0;
-            const increment = target / 100;
-            const intervalTime = 15;
+    // --- KPI Count-Up Animation ---
+    function animateCountUp(el) {
+        const target = parseInt(el.dataset.target, 10);
+        if (isNaN(target)) return;
+        el.textContent = '0';
+        let current = 0;
+        const increment = target / 100;
+        const intervalTime = 15;
 
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    el.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    el.textContent = Math.ceil(current);
-                }
-            }, intervalTime);
-        }
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                el.textContent = target;
+                clearInterval(timer);
+            } else {
+                el.textContent = Math.ceil(current);
+            }
+        }, intervalTime);
+    }
 
 
-// --- Savings Calculator Logic (Corrected Version) ---
+    // --- Savings Calculator Logic (Corrected Version) ---
+    const taskHoursSlider = document.getElementById('taskHours');
+    const numEmployeesSlider = document.getElementById('numEmployees');
+    const hourlyRateSlider = document.getElementById('hourlyRate');
+    const valueMultiplierSlider = document.getElementById('valueMultiplier');
 
-// 1. SELECT ALL THE NECESSARY ELEMENTS FROM THE HTML
-// Sliders
-const taskHoursSlider = document.getElementById('taskHours');
-const numEmployeesSlider = document.getElementById('numEmployees');
-const hourlyRateSlider = document.getElementById('hourlyRate');
-const valueMultiplierSlider = document.getElementById('valueMultiplier'); // New
+    const taskHoursValue = document.getElementById('taskHoursValue');
+    const numEmployeesValue = document.getElementById('numEmployeesValue');
+    const hourlyRateValue = document.getElementById('hourlyRateValue');
+    const valueMultiplierValue = document.getElementById('valueMultiplierValue');
 
-// Spans that show the current value of each slider
-const taskHoursValue = document.getElementById('taskHoursValue');
-const numEmployeesValue = document.getElementById('numEmployeesValue');
-const hourlyRateValue = document.getElementById('hourlyRateValue');
-const valueMultiplierValue = document.getElementById('valueMultiplierValue'); // New
+    const hoursSavedDisplay = document.getElementById('hoursSaved');
+    const moneySavedDisplay = document.getElementById('moneySaved');
+    const totalValueUnlockedDisplay = document.getElementById('totalValueUnlocked');
 
-// Spans that show the final calculation results
-const hoursSavedDisplay = document.getElementById('hoursSaved');
-const moneySavedDisplay = document.getElementById('moneySaved');
-const totalValueUnlockedDisplay = document.getElementById('totalValueUnlocked'); // New
+    function calculateSavings() {
+        const weeklyHours = parseFloat(taskHoursSlider.value);
+        const employees = parseInt(numEmployeesSlider.value);
+        const rate = parseFloat(hourlyRateSlider.value);
+        const multiplier = parseFloat(valueMultiplierSlider.value);
 
-// 2. CREATE THE CALCULATION FUNCTION
-function calculateSavings() {
-    // Read the current value from each of the four sliders
-    const weeklyHours = parseFloat(taskHoursSlider.value);
-    const employees = parseInt(numEmployeesSlider.value);
-    const rate = parseFloat(hourlyRateSlider.value);
-    const multiplier = parseFloat(valueMultiplierSlider.value); // New
+        const annualHoursSaved = weeklyHours * employees * 52;
+        const annualMoneySaved = annualHoursSaved * rate;
+        const totalValue = annualMoneySaved * multiplier;
 
-    // --- Perform the Calculations ---
-    // The old "* 0.80" logic has been removed for a direct calculation.
-    const annualHoursSaved = weeklyHours * employees * 52;
-    const annualMoneySaved = annualHoursSaved * rate;
-    const totalValue = annualMoneySaved * multiplier; // New calculation for total value
+        taskHoursValue.textContent = weeklyHours;
+        numEmployeesValue.textContent = employees;
+        hourlyRateValue.textContent = rate.toFixed(1);
+        valueMultiplierValue.textContent = multiplier.toFixed(1) + 'x';
 
-    // --- Update the Displayed Values on the Page ---
-    // Update the text next to the sliders
-    taskHoursValue.textContent = weeklyHours;
-    numEmployeesValue.textContent = employees;
-    hourlyRateValue.textContent = rate.toFixed(1);
-    valueMultiplierValue.textContent = multiplier.toFixed(1) + 'x'; // Update multiplier text
+        hoursSavedDisplay.textContent = Math.round(annualHoursSaved).toLocaleString();
+        moneySavedDisplay.textContent = `BHD ${Math.round(annualMoneySaved).toLocaleString()}`;
+        totalValueUnlockedDisplay.textContent = `BHD ${Math.round(totalValue).toLocaleString()}`;
+    }
 
-    // Update the final results, adding commas for readability
-    hoursSavedDisplay.textContent = Math.round(annualHoursSaved).toLocaleString();
-    moneySavedDisplay.textContent = `BHD ${Math.round(annualMoneySaved).toLocaleString()}`;
-    totalValueUnlockedDisplay.textContent = `BHD ${Math.round(totalValue).toLocaleString()}`; // Display the new total value
-}
+    taskHoursSlider.addEventListener('input', calculateSavings);
+    numEmployeesSlider.addEventListener('input', calculateSavings);
+    hourlyRateSlider.addEventListener('input', calculateSavings);
+    valueMultiplierSlider.addEventListener('input', calculateSavings);
 
-// 3. ADD EVENT LISTENERS TO RUN THE CALCULATION
-// This makes the calculator update automatically whenever a slider is moved.
-taskHoursSlider.addEventListener('input', calculateSavings);
-numEmployeesSlider.addEventListener('input', calculateSavings);
-hourlyRateSlider.addEventListener('input', calculateSavings);
-valueMultiplierSlider.addEventListener('input', calculateSavings); // New
-
-// 4. RUN THE CALCULATION ONCE WHEN THE PAGE LOADS
-calculateSavings();
+    calculateSavings();
+</script>
 
 </body>
 </html>
